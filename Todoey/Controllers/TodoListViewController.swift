@@ -12,30 +12,36 @@ class TodoListViewController: UITableViewController {
 
     var itemArray = [item]()
     
-    let defaults = UserDefaults.standard
+    //saving cell's data into location machine by NSCoder
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    //let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let newItem = item()
-        newItem.title = "Find Mike"
-        itemArray.append(newItem)
         
-        let newItem2 = item()
-        newItem2.title = "Buy Eggos"
-        itemArray.append(newItem2)
+       
+       
         
-        let newItem3 = item()
-        newItem3.title = "Destroy Demogorgon"
-        itemArray.append(newItem3)
-        
+//        let newItem = item()
+//        newItem.title = "Find Mike"
+//        itemArray.append(newItem)
+//
+//        let newItem2 = item()
+//        newItem2.title = "Buy Eggos"
+//        itemArray.append(newItem2)
+//
+//        let newItem3 = item()
+//        newItem3.title = "Destroy Demogorgon"
+//        itemArray.append(newItem3)
+//
         //reload actual device data into screen
-        if let items = defaults.array(forKey: "TodoListArray") as? [item]
-        {
-            itemArray = items
-        }
-        
+        //        if let items = defaults.array(forKey: "TodoListArray") as? [item]
+        //        {
+        //            itemArray = items
+        //        }
+        loadItems()
         
     }
     
@@ -46,7 +52,7 @@ class TodoListViewController: UITableViewController {
         return itemArray.count
     }
     
-    //2. what should the cell put data into it?(location)
+    //2. what should the cell put data into it?
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
@@ -81,15 +87,16 @@ class TodoListViewController: UITableViewController {
         
         //add & remove checkmark to cell (using if condition)
         
-        //itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
-        if itemArray[indexPath.row].done == false {
-            itemArray[indexPath.row].done = true
-        } else {
-            itemArray[indexPath.row].done = false
-        }
+        saveItems()
         
-         tableView.reloadData()
+//        if itemArray[indexPath.row].done == false {
+//            itemArray[indexPath.row].done = true
+//        } else {
+//            itemArray[indexPath.row].done = false
+//        }
+        
         //making the gray colour fade away in the cell
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -111,10 +118,9 @@ class TodoListViewController: UITableViewController {
             self.itemArray.append(newItem)
             
             //save data in actual device
-            self.defaults.set(self.itemArray, forKey: "TodoListArray")
+            //self.defaults.set(self.itemArray, forKey: "TodoListArray")
             
-            //reloadData into Table
-            self.tableView.reloadData()
+            self.saveItems()
             
         }
         //2.5 insert a text field inside alert
@@ -131,6 +137,35 @@ class TodoListViewController: UITableViewController {
         
     }
     
+    //MARK - Model Manupulation Methods
+    func saveItems() {
+        //using NSCoder to save item data on device
+        let encoder = PropertyListEncoder()
+        do{
+            let data = try encoder.encode(itemArray)
+            try data.write(to: dataFilePath!)
+        }catch{
+            print("Error encoding item array,\(error)")
+        }
+        
+        //reloadData into Table
+        self.tableView.reloadData()
+    }
+    
+    func loadItems() {
+        
+        //decoder data from device
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            do{
+            itemArray = try decoder.decode([item].self, from:data)
+            }
+            catch{
+                print("Error decoding item array, \(error)")
+            }
+            
+        }
+    }
 
 }
 
