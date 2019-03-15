@@ -14,7 +14,28 @@
 		C36810D7222CF8C800454EE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C36810D6222CF8C800454EE7 /* Assets.xcassets */; };
 		C36810DA222CF8C800454EE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C36810D8222CF8C800454EE7 /* LaunchScreen.storyboard */; };
 		C39283282234D77000C2EE14 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39283272234D77000C2EE14 /* CategoryViewController.swift */; };
+		C3EC5342223BE354005F964C /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EC5340223BE351005F964C /* RealmSwift.framework */; };
+		C3EC5343223BE354005F964C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EC5341223BE354005F964C /* Realm.framework */; };
+		C3EC5344223BE39C005F964C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EC5341223BE354005F964C /* Realm.framework */; };
+		C3EC5345223BE39C005F964C /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3EC5341223BE354005F964C /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C3EC5346223BE39C005F964C /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EC5340223BE351005F964C /* RealmSwift.framework */; };
+		C3EC5347223BE39C005F964C /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3EC5340223BE351005F964C /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C3EC5348223BE39C005F964C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C3EC5347223BE39C005F964C /* RealmSwift.framework in Embed Frameworks */,
+				C3EC5345223BE39C005F964C /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C31E99FC222D7798000331D9 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -26,6 +47,8 @@
 		C36810D9222CF8C800454EE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C36810DB222CF8C800454EE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C39283272234D77000C2EE14 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		C3EC5340223BE351005F964C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		C3EC5341223BE354005F964C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +56,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3EC5344223BE39C005F964C /* Realm.framework in Frameworks */,
+				C3EC5343223BE354005F964C /* Realm.framework in Frameworks */,
+				C3EC5346223BE39C005F964C /* RealmSwift.framework in Frameworks */,
+				C3EC5342223BE354005F964C /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +125,8 @@
 				C313569C222D310000C320F1 /* views */,
 				C313569D222D313F00C320F1 /* Supporting Files */,
 				C36810DB222CF8C800454EE7 /* Info.plist */,
+				C3EC5341223BE354005F964C /* Realm.framework */,
+				C3EC5340223BE351005F964C /* RealmSwift.framework */,
 			);
 			path = Todoey;
 			sourceTree = "<group>";
@@ -112,6 +141,8 @@
 				C36810C8222CF8C700454EE7 /* Sources */,
 				C36810C9222CF8C700454EE7 /* Frameworks */,
 				C36810CA222CF8C700454EE7 /* Resources */,
+				C3EC5348223BE39C005F964C /* Embed Frameworks */,
+				C3EC5349223BE41F005F964C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -167,6 +198,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C3EC5349223BE41F005F964C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C36810C8222CF8C700454EE7 /* Sources */ = {
@@ -324,6 +375,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KCPU3Z45GZ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Todoey",
+				);
 				INFOPLIST_FILE = Todoey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -342,6 +397,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KCPU3Z45GZ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Todoey",
+				);
 				INFOPLIST_FILE = Todoey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
